@@ -1,0 +1,23 @@
+# C++ objects and binaries
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dll
+
+# Build directories
+/build/
+/cmake-build-*/
+
+# IDE and system files
+*.log
+*.tmp
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+.idea/
+.DS_Store
