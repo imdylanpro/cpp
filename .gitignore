@@ -21,3 +21,18 @@
 .vscode/
 .idea/
 .DS_Store
+
+# Ignore Visual Studio files
+.vs/
+*.user
+*.suo
+*.VC.db
+*.VC.opendb
+
+# Ignore build output
+Debug/
+Release/
+*.obj
+*.exe
+*.dll
+*.pdb
