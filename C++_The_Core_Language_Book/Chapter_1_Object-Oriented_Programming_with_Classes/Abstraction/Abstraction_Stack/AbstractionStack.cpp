@@ -22,6 +22,22 @@ void push(Stack* s, int i) { s->items[s->top++] = i; } // Assigning i with point
 int pop(Stack* s) { return s->items[--s->top]; } // Return the value of top in items with pointer access.
 void cleanup(Stack* s) {} // no cleanup needed for static stack.
 
+typedef struct {
+	Stack basicStack;
+} StatStack;
+
+/* New to StatStack */
+int mean(StatStack* s) {/*some implementation*/ }
+int median(StatStack* s) {/*some implementation*/ }
+int mode(StatStack* s) {/*some implementation*/ }
+
+/* in Stack, using Stack's predefined functions to implement with StatStack*/
+void ss_init(StatStack* s) { init(&s->basicStack); }
+void ss_push(StatStack* s, int i) { push(&s->basicStack, i); }
+int ss_pop(StatStack* s) { return pop(&s->basicStack); }
+void ss_cleanup(StatStack* s) { cleanup(&s->basicStack); }
+
+
 int main() {
 
 	// const declares a constant, STACKSIZE's size cannot be changed.
