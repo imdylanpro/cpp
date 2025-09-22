@@ -19,11 +19,14 @@ public:
 		ssn = sn;
 	}
 
-	int getAge() {
+	int getAge() const {
+		//		 ^ const marks this member function as a constant, meaning it does not modify the object.
+		//			It lets the compiler know that it will not modify the object and therefore is safe for
+		//			other const calls. It is considered best practice to mark getter member functions this way.
 		return age;
 	}
 
-	string getName() {
+	string getName() const {
 		return name;
 	}
 
@@ -33,11 +36,11 @@ private:
 	int ssn;
 	int savings;
 
-	int getSSN() {
+	int getSSN() const {
 		return ssn;
 	}
 
-	int getSavings() {
+	int getSavings() const {
 		return savings;
 	}
 
@@ -60,7 +63,7 @@ private:
 
 class Government {
 public:
-	void printCitizenInformation(Citizen c) {
+	void printCitizenInformation(const Citizen& c) {
 		cout << "Citizen name: " << c.getName() << endl;
 		cout << "Citizen age: " << c.getAge() << endl;
 		cout << "Citizen Social Security Number: " << c.getSSN() << endl;
@@ -75,7 +78,7 @@ public:
 		// Take the citizens money.
 		taxAmount = c.getSavings() * taxPercent; // Take 20% of the citizens money.
 		cout << "Taxing " << c.getName() << " by " << taxPercent * 100 << "%." << endl;
-		taxCollections += taxAmount;
+		setTaxCollections(getTaxCollections() + taxAmount);
 		cout << taxAmount << " added to tax collections." << endl;
 		
 		newSavings = c.getSavings() - taxAmount;
@@ -84,8 +87,17 @@ public:
 
 	}
 
+	double getTaxCollections() {
+		return taxCollections;
+	}
+
 private:
 	double taxCollections = 0;
+
+	void setTaxCollections(double tc) {
+		taxCollections = tc;
+	}
+
 };
 
 int main() {
@@ -94,12 +106,14 @@ int main() {
 	Citizen citizen1 = Citizen("Michael", 34, 1000, 123456789);
 	Government USGovernment = Government();
 
+	cout << "Government Coffers: " << USGovernment.getTaxCollections() << endl;
+
 	// Print out citizens private information.
 	USGovernment.printCitizenInformation(citizen1);
-
 	// Tax the citizen.
 	USGovernment.taxCitizen(citizen1);
-
 	// Print out private info.
 	USGovernment.printCitizenInformation(citizen1);
+
+	cout << "Government Coffers: " << USGovernment.getTaxCollections() << endl;
 }
