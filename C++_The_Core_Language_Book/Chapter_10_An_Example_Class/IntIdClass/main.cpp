@@ -48,11 +48,7 @@ int main() {
 	
 	myID.print(&std::cout);
 	myID2.print(&std::cout);
-
-
 	std::cout << std::endl;
 
-
-	
 	return 0;
 }
