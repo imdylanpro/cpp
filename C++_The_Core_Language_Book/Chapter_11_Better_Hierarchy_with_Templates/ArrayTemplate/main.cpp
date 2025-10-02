@@ -56,11 +56,9 @@ void Array<Type>::setSize(size_t value) {
 
 template<class Type>
 void Array<Type>::printArray() const {
-
 	for (size_t i = 0; i < getSize(); ++i) {
 		std::cout << "Element " << i << ": " << getElem(i) << std::endl;
 	}
-
 }
 
 int main() {
