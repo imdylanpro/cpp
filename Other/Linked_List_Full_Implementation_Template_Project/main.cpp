@@ -37,7 +37,9 @@ void intLinkedList() {
 	myintLL.deleteAtIndex(0);
 	myintLL.deleteAtIndex(5);
 	myintLL.deleteAtIndex(100);
-
+	myintLL.sort(true); // Ascending sort.
+	myintLL.printList();
+	myintLL.sort(false); // Descending sort.
 	myintLL.printList();
 }
 
@@ -55,11 +57,16 @@ void charLinkedList() {
 	mycharLL.postpend('d');
 	mycharLL.prepend('e');
 
+	// Demonstrate that the Copy-Constructor is functional.
+	LinkedList<char> mycharLL2 = mycharLL;
+
 	mycharLL.deleteAtIndex(5);
 	mycharLL.deleteAtIndex(4);
 	mycharLL.deleteAtIndex(100);
+	mycharLL.deleteAllOf('b');
 
 	mycharLL.printList();
+	mycharLL2.printList();
 }
 
 int main() {

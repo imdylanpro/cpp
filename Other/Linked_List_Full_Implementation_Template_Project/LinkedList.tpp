@@ -26,7 +26,7 @@ LinkedList<Type>::~LinkedList() {
 // Copy-Constructor
 template <typename Type>
 LinkedList<Type>::LinkedList(const LinkedList& source) : head(nullptr) {
-	
+
 	if (!source.head) return;
 
 	head = new Node(source.head->data);
@@ -71,10 +71,10 @@ void LinkedList<Type>::postpend(const Type& value) {
 template <typename Type>
 void LinkedList<Type>::deleteAllOf(const Type& value) {
 
-	
+
 	// Special case: LinkedList is empty
 	if (!head) return;
-	
+
 	// Special case: head nodes need to be deleted.
 	while (head && head->data == value) {
 		Node* temp = head;
@@ -95,9 +95,24 @@ void LinkedList<Type>::deleteAllOf(const Type& value) {
 	}
 }
 
-template <typename Type>
+template <class Type>
 void LinkedList<Type>::sort(bool order) {
+	if (!head || !head->next) return; // List is empty or has one element
 
+	bool swapped;
+	do {
+		swapped = false;
+		Node* current = head;
+		while (current->next) {
+			bool shouldSwap = order ? (current->data > current->next->data)
+									: (current->data < current->next->data);
+			if (shouldSwap) {
+				std::swap(current->data, current->next->data);
+				swapped = true;
+			}
+			current = current->next;
+		}
+	} while (swapped);
 }
 
 template <typename Type>
