@@ -54,7 +54,6 @@ LinkedList::LinkedList(const LinkedList& source) : head(nullptr) {
 	Node* currNew = head;
 	Node* currSource = source.head->next;
 
-
 	while (currSource) {
 		// Create the new node based on the value of the current of source.
 		currNew->next = new Node(currSource->val);

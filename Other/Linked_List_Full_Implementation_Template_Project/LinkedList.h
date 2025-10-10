@@ -33,6 +33,7 @@ private:
 public:
 	LinkedList();							// Constructor
 	~LinkedList();							// Destructor
+	LinkedList(const LinkedList& source);	// Copy-Constructor
 	void prepend(const Type& value);
 	void postpend(const Type& value);
 	void deleteAtIndex(const int index);
@@ -53,128 +54,5 @@ Templates can be included separately, if a .tpp file (template implementation fi
 header.
 */
 
-// Node Constructor with initializer list.
-template <typename Type>
-LinkedList<Type>::Node::Node(const Type& value) : data(value), next(nullptr) {}
-
-// LinkedList Constructor with initializer list.
-template <typename Type>
-LinkedList<Type>::LinkedList() : head(nullptr) {}
-
-// Destructor
-template <typename Type>
-LinkedList<Type>::~LinkedList() {
-	Node* current = head;
-	while (current) {
-		Node* nextNode = current->next;
-		delete current;
-		current = nextNode;
-	}
-}
-
-// Add item to beginning of list.
-template <typename Type>
-void LinkedList<Type>::prepend(const Type& value) {
-	Node* newNode = new Node(value);
-	newNode->next = head;
-	head = newNode;
-}
-
-template <typename Type>
-void LinkedList<Type>::postpend(const Type& value) {
-	Node* current = head;
-
-	if (!current) {
-		prepend(value);
-		return;
-	}
-
-	while (current->next) {
-		current = current->next;
-	}
-	Node* newNode = new Node(value);
-	current->next = newNode;
-}
-
-template <typename Type>
-void LinkedList<Type>::deleteAllOf(const Type& value) {
-
-	
-	// Special case: LinkedList is empty
-	if (!head) return;
-	
-	// Special case: head nodes need to be deleted.
-	while (head && head->data == value) {
-		Node* temp = head;
-		head = head->next;
-		delete temp;
-	}
-
-	Node* curr = head;
-	while (curr && curr->next) {
-		if (curr->next->data == value) {
-			Node* temp = curr->next;
-			curr->next = curr->next->next;
-			delete temp;
-		}
-		else {
-			curr = curr->next;
-		}
-	}
-}
-
-template <typename Type>
-void LinkedList<Type>::sort(bool order) {
-
-}
-
-template <typename Type>
-void LinkedList<Type>::printList() {
-	Node* current = head;
-	while (current) {
-		if (current->next) std::cout << current->data << ", ";
-		else std::cout << current->data;
-		current = current->next;
-	}
-	std::cout << std::endl;
-}
-
-template <typename Type>
-void LinkedList<Type>::deleteAtIndex(const int index) {
-
-	if (index < 0) {
-		std::cout << "Invalid index!" << std::endl;
-		return;
-	}
-
-	Node* curr = head;
-
-	if (!curr) {
-		std::cout << "List is empty!" << std::endl;
-		return;
-	}
-
-	if (index == 0) {
-		Node* next = curr->next;
-		delete curr;
-		head = next;
-		return;
-	}
-
-	for (int j = 0; j < index - 1; j++) {
-		if (!curr->next) {
-			std::cout << "Invalid index!" << std::endl;
-			return;
-		}
-		curr = curr->next;
-	}
-
-	Node* temp = curr->next;
-	if (!temp) {
-		std::cout << "Invalid index!" << std::endl;
-		return;
-	}
-
-	curr->next = temp->next;
-	delete temp;
-}
+// Here the entirety of LinkedList.tpp is placed inline. Helping separate the implementation from the declaration.
+#include "LinkedList.tpp"
